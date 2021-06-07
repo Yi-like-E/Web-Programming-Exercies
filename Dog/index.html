@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Events</title>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+    <h1 id="dom-events">DOM Events</h1>
+
+    <p>Let's experiment with DOM events!</p>
+
+    <h2>Mouse Info</h2>
+    <p>
+      Mouse position: (<span id="mouse-x">100</span>,
+      <span id="mouse-y">231</span>)
+    </p>
+
+    <h2>A dog</h2>
+    <img
+      id="dog"
+      src="https://images.dog.ceo/breeds/hound-walker/n02089867_1987.jpg"
+    />
+
+    <!-- Where the dog URLs will go-->
+    <div id="dog-url-list"></div>
+    <!-- Clicking this will fill the url list-->
+    <button id="more-dogs">More dogs...</button>
+
+    <script src="hound.js"></script>
+    <script>
+      window.onload = function () {
+        console.log("window.onload");
+      };
+      window.addEventListener("DOMContentLoaded", function () {
+        console.log("window DOMContentLoaded");
+        let dog = document.querySelector("#dog");
+        dog.onload = function () {
+          console.log("dog <img> onload");
+        };
+        dog.onerror = function () {
+          console.error("dog <img> error");
+        };
+
+        document.body.onclick = function (evt) {
+          console.log("body clicked", evt.target);
+        };
+
+        // dog.onclick = function (e) {
+        //   console.log("dog <img> clicked", e.target);
+        //   e.stopPropagation();
+        // };
+
+        let currentHoundImageIdx = 0;
+        // get back a url from the hounds array
+        function nextHoundImageUrl() {
+          currentHoundImageIdx++;
+          if (currentHoundImageIdx === hounds.length - 1) {
+            currentHoundImageIdx = 0;
+          }
+          return hounds[currentHoundImageIdx];
+        }
+        function handleDogClick(e) {
+          //console.log("dog <img> clicked", nextHoundImageUrl());
+          dog.src = nextHoundImageUrl();
+          e.stopPropagation();
+        }
+        dog.addEventListener("click", handleDogClick);
+
+        // // setTimeout(fn, time ms) only run ONCE
+        // setTimeout(function () {
+        //   console.log("timeout complete, running function...");
+        //   dog.src = nextHoundImageUrl();
+        // }, 2 * 1000);
+
+        // run this function every ms
+        setInterval(function () {
+          console.log("interval complete, running function...");
+          dog.src = nextHoundImageUrl();
+        }, 2 * 1000);
+
+        document.body.onmousemove = function (evt) {
+          let mouseX = document.querySelector("#mouse-x");
+          let mouseY = document.querySelector("#mouse-y");
+          mouseX.innerText = evt.clientX;
+          mouseY.innerText = evt.clientY;
+          //console.log("body mousemove", evt.clientX, evt.clientY);
+        };
+
+        let moreDogsBtn = document.querySelector("#more-dogs");
+        moreDogsBtn.addEventListener("click", function () {
+          //Remove the button from the DOM
+          moreDogsBtn.remove();
+
+          // get the <div>
+          let div = document.querySelector("#dog-url-list");
+          // create ordered list
+          let ol = document.createElement("ol");
+          hounds.forEach(function (url) {
+            let li = document.createElement("li");
+            let a = document.createElement("a");
+            a.href = url;
+            a.innerText = url;
+            a.Target = "_blank";
+
+            li.appendChild(a);
+            ol.appendChild(li);
+          });
+
+          div.appendChild(ol);
+        });
+      });
+    </script>
+  </body>
+</html>
