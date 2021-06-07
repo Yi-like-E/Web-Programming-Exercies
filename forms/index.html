@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Form with CSS</title>
+        <link rel="stylesheet" href="styles.css" type="text/css">
+    </head>
+    <body>
+        <h1>Forms and CSS styling</h1>
+        <p>
+            This from demonstrates many of the topics we have been discussing this week. 
+            For this sample form, we're building a User Feedback form.
+        </p>
+        <form action="/feedback" method="post">
+            <label for="feedback-user">Username</label>
+            <!-- autofocus automatically get focus on the input element when the page loads 
+            tabindex indicates that its element can be focus and via tab key can jump to the next one -->      
+
+            <input
+                id="feedback-user"
+                name="username"
+                autocomplete="username"
+                text="text"
+                autofocus         
+                tabindex="1"
+                maxlength="25"
+            >
+
+            <label for="feedback=fullname">Fullname</label>
+            <input
+                id="feedback-fullname"
+                name="name"
+                autocomplete="name"
+                type="text"
+                tabindex="2"
+            >
+
+            <label for="feedback-email">Email</label>
+            <input
+                id="feedback-email"
+                name="email"
+                autocomplete="email"
+                type="email"
+                tabindex="3"
+            >
+
+            <label for="feedback-date">Date</label>
+            <input
+                id="feedback-date"
+                name="date"
+                type="date"
+                tabindex="4"
+            >
+
+            <label for="feedback-problem">Problem</label>
+            <input
+                id="feedback-problem"
+                name="Problem"
+                tabindex="5"
+                list="feedback-problems"
+                placeholder="What is the problem related ot?"
+            >
+            <datalist id="feedback-problems">
+                <option value="Network"></option>
+                <option value="User Interface"></option>
+                <option value="Documentation"></option>
+                <option value="Website"></option>
+                <option value="Other"></option>
+            </datalist>
+
+            <textarea id="feedback-message" name="message" rows="10" tabindex="6" 
+                placeholder="Tell us about your problem.">
+            </textarea>
+
+            <label for="feedback-file">Screenshot</label>
+            <input
+                id="feedback-file"
+                name="file"
+                type="file"
+                tabindex="7"
+                accept="image/png, image/jpeg"
+            >
+
+            <div class="buttons">
+                <input type="submit" name="submit" value="Submit" tabindex="8">
+                <input type="reset" name="reset" value="Reset" tabindex="9">
+            </div>
+            
+        </form>
+    </body>
+
+</html>

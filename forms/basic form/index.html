@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Forms Example</title>
+    </head>
+
+    <main>
+        <!--
+            default method is get query string
+            post will use the body of the HTTP request
+            action-"#" mean sending the form within the webpage, not anywhere else
+
+        -->
+        <!-- Basic form-->
+        <form action="/search" method="post">
+            <input id="first-name" name="first-name" value="" type="text">
+            <input id="last-name" name="last-name" value="" type="text">
+        </form>
+
+        <!-- Mimic seneca website -->
+        <form action="/programs/program-search.html" method="get">
+            <input id="keywords" name="keywords" type="text"
+                placeholder="What would you like to study?"
+            >
+        </form>
+
+        <!-- Mimic seneca log in-->
+        <form method="post" action="/adfs/ls/......">
+            <input id="userNameInput" name="UserName" type="email"
+            placeholder="student@myseneca.ca" spellcheck="false" autocomplete="off">
+            <input id="passwordInput" name="Password" type="password">
+        </form>
+
+        <!-- Mimic google form-->
+        <form id="tsf" class="class1 class2" action="/search" method="GET">
+            <input type="text" maxlength="2048" name="q" title="Search">
+            <input value="Google Search" name="btnk" type="submit">
+            <input value="I'm Feeling Lucky" name="btnI" type="submit">
+
+            <input type="hidden" name="source" value="hp">
+            <input type="hidden" name="?" value="?">
+            <input type="hidden">
+            <input type="hidden">
+        </form>
+
+        <!-- Youtube upload video-->
+        <form>
+            <input type="file">
+        </form>
+    </main>
+</html>
